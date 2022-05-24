@@ -1,38 +1,63 @@
 #include <iostream>
 #include <string>
+#include <stack>
 
 using namespace std;
 
 template<typename T>
-class Store
+class Stack
 {
 public:
-	Store() {}
-	virtual ~Store() {}
+	Stack() {}
+	virtual ~Stack() {}
 
-	T Database;
+	T Database[10];
+	T Temp[10];
 
-	void Append(T A)
+	int Cursor = -1;
+
+	void Push(T A)
 	{
-		Database = A;
+		Database[++Cursor] = A;
 	}
 
-	T Out()
+	void Pop()
 	{
-		return Database;
+		Cursor--;
+	}
+
+	T Top()
+	{
+		return Database[Cursor];
 	}
 };
 
-
 int main()
 {
-	Store<int> IntStore;
-	IntStore.Append(10);
-	cout << IntStore.Out() << endl;
+	Stack<float> IntStack;
 
-	Store<float> FloatStore;
-	FloatStore.Append(2.2f);
-	cout << FloatStore.Out() << endl;
+	for (int i = 1; i <= 10; ++i)
+	{
+		IntStack.Push(i);
+	}
+
+	for (int i = 1; i <= 10; ++i)
+	{
+		cout << IntStack.Top() << ", ";
+		IntStack.Pop();
+	}
+
+	stack<float> FloatStackSTL;
+	for (int i = 1; i <= 10; ++i)
+	{
+		FloatStackSTL.push(i * 1.1f);
+	}
+
+	for (int i = 1; i <= 10; ++i)
+	{
+		cout << FloatStackSTL.top() << ", ";
+		FloatStackSTL.pop();
+	}
 
 	return 0;
 }
