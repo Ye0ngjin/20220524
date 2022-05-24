@@ -1,15 +1,14 @@
 #include <iostream>
 #include <string>
-#include <stack>
 
 using namespace std;
 
 template<typename T>
-class Stack
+class Queue
 {
 public:
-	Stack() {}
-	virtual ~Stack() {}
+	Queue() {}
+	virtual ~Queue() {}
 
 	T Database[10];
 	T Temp[10];
@@ -24,39 +23,30 @@ public:
 	void Pop()
 	{
 		Cursor--;
+		for (int i = 0; i < 9; i++)
+		{
+			Database[i] = Database[i + 1];
+		}
 	}
 
 	T Top()
 	{
-		return Database[Cursor];
+		return Database[0];
 	}
 };
 
 int main()
 {
-	Stack<float> IntStack;
-
+	Queue<int> IntQueue;
 	for (int i = 1; i <= 10; ++i)
 	{
-		IntStack.Push(i);
+		IntQueue.Push(i);
 	}
 
 	for (int i = 1; i <= 10; ++i)
 	{
-		cout << IntStack.Top() << ", ";
-		IntStack.Pop();
-	}
-
-	stack<float> FloatStackSTL;
-	for (int i = 1; i <= 10; ++i)
-	{
-		FloatStackSTL.push(i * 1.1f);
-	}
-
-	for (int i = 1; i <= 10; ++i)
-	{
-		cout << FloatStackSTL.top() << ", ";
-		FloatStackSTL.pop();
+		cout << IntQueue.Top() << ", ";
+		IntQueue.Pop();
 	}
 
 	return 0;
